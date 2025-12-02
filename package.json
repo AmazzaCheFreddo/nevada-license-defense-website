@@ -1,0 +1,38 @@
+{
+  "name": "nevada-license-defense",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@tiptap/react": "^2.1.13",
+    "@tiptap/starter-kit": "^2.1.13",
+    "@tiptap/extension-text-style": "^2.1.13",
+    "@tiptap/extension-color": "^2.1.13",
+    "@tiptap/extension-text-align": "^2.1.13",
+    "@tiptap/extension-underline": "^2.1.13",
+    "@tiptap/extension-link": "^2.1.13",
+    "date-fns": "^3.6.0",
+    "gray-matter": "^4.0.3",
+    "next": "^16.0.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "resend": "^6.5.2",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.25",
+    "@types/react": "^18.3.27",
+    "@types/react-dom": "^18.3.7",
+    "autoprefixer": "^10.4.22",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.33",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.18",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,103 @@
+# Cursor Rules for Nevada License Defense Website
+
+## Project Context
+- This is a Next.js 14+ website built with TypeScript and Tailwind CSS
+- Professional law firm website for Nevada License Defense
+- Focus on clean, maintainable, and performant code
+
+## Visual Website Style
+- Sans serif fonts, incorporating bold lettering
+- Use the following hex code colors; Dark Blue: #12203bff Light Gold: #f0c563ff Dark Gold: #b27e4fff Brown: #6D5D49
+- The provided hex colors are a part of the logo; Dark Blue is the base of the logo, so Dark Blue cannot be used behind the logo file
+- Do not use the lighter gold color (#f0c563ff) for any text that is on top of a white background - the visibility and contrast is poor
+- Incorporate visual ease animations on elements to provide a sophisticated, modern look
+
+## Visual Hierarchy Rules
+- Use equal column sizes when creating multi-column layouts for visual balance
+- Maintain consistent spacing and alignment across similar elements
+- Ensure visual balance in grid layouts - avoid lopsided or uneven column distributions
+
+## Code Style Preferences
+
+### TypeScript/React
+- Use TypeScript for all new files
+- Prefer functional components with hooks over class components
+- Use explicit type annotations for function parameters and return types
+- Prefer `interface` over `type` for object shapes
+- Use `'use client'` directive only when necessary (for hooks, event handlers, etc.)
+
+### Component Organization
+- Keep components small and focused on a single responsibility
+- Place reusable components in `components/ui/`
+- Place page-specific components in `components/sections/`
+- Use default exports for components
+- Co-locate component styles with components when possible
+
+### Styling
+- Use Tailwind CSS utility classes
+- Prefer Tailwind over custom CSS when possible
+- Use CSS variables for theme colors defined in `tailwind.config.js`
+- Keep custom CSS in `app/globals.css` minimal
+- Use responsive design (mobile-first approach)
+
+### File Naming
+- Use kebab-case for file names: `contact-form.tsx`
+- Use PascalCase for component names: `ContactForm`
+- Use descriptive, clear names
+
+### Code Quality
+- Write self-documenting code with clear variable names
+- Add comments only when logic is complex or non-obvious
+- Prefer early returns over nested conditionals
+- Use async/await over promises when possible
+- Handle errors gracefully with try/catch
+
+### Next.js Specific
+- Use App Router (not Pages Router)
+- Use Server Components by default, Client Components only when needed
+- Use Next.js Image component for images
+- Use Next.js Link component for internal navigation
+- Implement proper SEO with metadata in layout.tsx and page.tsx
+
+### Performance
+- Optimize images before adding to project
+- Use dynamic imports for heavy components
+- Minimize bundle size
+- Use React.memo() sparingly, only when profiling shows it's needed
+
+### Accessibility
+- Always include alt text for images
+- Use semantic HTML elements
+- Ensure proper heading hierarchy (h1 → h2 → h3)
+- Include ARIA labels when needed
+- Ensure keyboard navigation works
+
+### Git/Version Control
+- Write clear, descriptive commit messages
+- Don't commit node_modules, .next, or build files
+- Keep commits focused on single features/fixes
+
+## Communication Style
+- Explain complex decisions briefly
+- Suggest improvements when appropriate
+- Point out potential issues or better alternatives
+- Be concise but thorough
+
+## When Making Changes
+- Preserve existing functionality unless explicitly asked to change it
+- Update related files if making structural changes
+- Check for linting errors after changes
+- Ensure responsive design still works after changes
+
+## Testing Considerations
+- Write code that's easy to test (though we're not writing tests yet)
+- Keep components pure when possible
+- Avoid side effects in render functions
+
+## Development Workflow
+- **ALWAYS start the development server when Cursor resets/reopens or when beginning a new session**
+- Run `npm run dev` (or use the VS Code task "Start Dev Server") to start the local development server
+- The server should be running on `http://localhost:3000` before making changes that need to be previewed
+- If the server is not running, start it immediately at the beginning of any coding session
+
+

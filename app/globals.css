@@ -1,0 +1,318 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply text-gray-900 antialiased;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-dark-blue text-white px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-0.5;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-dark-blue px-6 py-3 rounded-lg font-bold border-2 border-dark-blue hover:bg-light-gold hover:border-light-gold transition-all duration-300;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-gold {
+    @apply bg-light-gold text-dark-blue px-6 py-3 rounded-lg font-bold hover:bg-dark-gold hover:text-white transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .section-container {
+    @apply max-w-7xl mx-auto px-2 sm:px-4 lg:px-6;
+  }
+  
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .animate-on-scroll {
+    @apply opacity-0;
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    @apply transform -translate-y-1 shadow-lg;
+  }
+
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .heartbeat-line {
+    stroke-dasharray: none;
+  }
+
+  .group:hover .heartbeat-line {
+    stroke-dasharray: 50 150;
+    animation: heartbeatDraw 3s linear infinite;
+  }
+
+  @keyframes heartbeatDraw {
+    0% {
+      stroke-dashoffset: 200;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Pharmacy bottle shake animation */
+  .bottle-group {
+    transform-origin: 50px 50px;
+  }
+
+  .group:hover .bottle-group {
+    animation: bottleShake 1.2s ease-in-out infinite;
+  }
+
+
+  @keyframes bottleShake {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-8px) rotate(-4deg);
+    }
+    50% {
+      transform: translateY(8px) rotate(4deg);
+    }
+    75% {
+      transform: translateY(-8px) rotate(-4deg);
+    }
+  }
+
+  @keyframes pillJump {
+    0%, 100% {
+      transform: translateX(0) translateY(0);
+    }
+    20% {
+      transform: translateX(0) translateY(-10px);
+    }
+    40% {
+      transform: translateX(0) translateY(-8px);
+    }
+    50% {
+      transform: translateX(0) translateY(0);
+    }
+    70% {
+      transform: translateX(0) translateY(4px);
+    }
+    85% {
+      transform: translateX(0) translateY(2px);
+    }
+  }
+
+  .group:hover .pill-1 {
+    animation: pillJumpLeft 1.2s ease-in-out infinite;
+    animation-delay: 0.05s;
+  }
+
+  .group:hover .pill-2 {
+    animation: pillJumpCenter 1.2s ease-in-out infinite;
+    animation-delay: 0.05s;
+  }
+
+  .group:hover .pill-3 {
+    animation: pillJumpRight 1.2s ease-in-out infinite;
+    animation-delay: 0.05s;
+  }
+
+  @keyframes pillJumpLeft {
+    0%, 100% {
+      transform: translateX(0) translateY(0);
+    }
+    25% {
+      transform: translateX(2px) translateY(-5px);
+    }
+    50% {
+      transform: translateX(0) translateY(0);
+    }
+    51% {
+      transform: translateX(-0.3px) translateY(0.2px);
+    }
+    52.5% {
+      transform: translateX(-0.5px) translateY(-0.8px);
+    }
+    54% {
+      transform: translateX(0) translateY(0.4px);
+    }
+    55.5% {
+      transform: translateX(0) translateY(-0.2px);
+    }
+    57% {
+      transform: translateX(0) translateY(0.1px);
+    }
+    60% {
+      transform: translateX(0) translateY(0);
+    }
+    75% {
+      transform: translateX(2px) translateY(-5px);
+    }
+  }
+
+  @keyframes pillJumpCenter {
+    0%, 100% {
+      transform: translateX(0) translateY(0);
+    }
+    25% {
+      transform: translateX(0) translateY(-5px);
+    }
+    50% {
+      transform: translateX(0) translateY(0);
+    }
+    51% {
+      transform: translateX(0) translateY(0.3px);
+    }
+    52.5% {
+      transform: translateX(0) translateY(-1.2px);
+    }
+    54% {
+      transform: translateX(0) translateY(0.5px);
+    }
+    55.5% {
+      transform: translateX(0) translateY(-0.3px);
+    }
+    57% {
+      transform: translateX(0) translateY(0.1px);
+    }
+    60% {
+      transform: translateX(0) translateY(0);
+    }
+    75% {
+      transform: translateX(0) translateY(-5px);
+    }
+  }
+
+  @keyframes pillJumpRight {
+    0%, 100% {
+      transform: translateX(0) translateY(0);
+    }
+    25% {
+      transform: translateX(-2px) translateY(-5px);
+    }
+    50% {
+      transform: translateX(0) translateY(0);
+    }
+    51% {
+      transform: translateX(0.3px) translateY(0.15px);
+    }
+    52.5% {
+      transform: translateX(0) translateY(-0.8px);
+    }
+    54% {
+      transform: translateX(0) translateY(0.35px);
+    }
+    55.5% {
+      transform: translateX(0) translateY(-0.2px);
+    }
+    57% {
+      transform: translateX(0) translateY(0.1px);
+    }
+    60% {
+      transform: translateX(0) translateY(0);
+    }
+    75% {
+      transform: translateX(-2px) translateY(-5px);
+    }
+  }
+
+
+  /* Prevent flash of unstyled content for mountain animations */
+  .animate-mountain-rise-mid,
+  .animate-mountain-rise-fore {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  /* Stethoscope earpiece wiggle animation */
+  .earpiece-left-group {
+    transform-origin: 184.17849px 67.791413px;
+  }
+
+  .group:hover .earpiece-left-group {
+    animation: earpieceWiggleLeft 1.5s ease-in-out infinite;
+  }
+
+  .earpiece-right-group {
+    transform-origin: 184.17849px 67.791413px;
+  }
+
+  .group:hover .earpiece-right-group {
+    animation: earpieceWiggleRight 1.5s ease-in-out infinite;
+  }
+
+  /* Stethoscope bottom piece swing animation */
+  .stethoscope-bottom-group {
+    transform-origin: 184.18091px 68.479665px;
+  }
+
+  .group:hover .stethoscope-bottom-group {
+    animation: stethoscopeBottomSwing 1.5s ease-in-out infinite;
+  }
+
+  @keyframes earpieceWiggleLeft {
+    0%, 100% {
+      transform: translateX(0) rotate(0deg);
+    }
+    50% {
+      transform: translateX(-3px) rotate(-8deg);
+    }
+  }
+
+  @keyframes earpieceWiggleRight {
+    0%, 100% {
+      transform: translateX(0) rotate(0deg);
+    }
+    50% {
+      transform: translateX(3px) rotate(8deg);
+    }
+  }
+
+  @keyframes stethoscopeBottomSwing {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(8deg);
+    }
+  }
+}
+
+
+
+
+
