@@ -27,10 +27,11 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "resend": "^6.5.2",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "@opennextjs/cloudflare": "^1.16.0",
+    "wrangler": "^4.59.2"
   },
   "devDependencies": {
-    "@opennextjs/cloudflare": "^1.16.0",
     "@types/node": "^20.19.25",
     "@types/react": "^18.3.27",
     "@types/react-dom": "^18.3.7",
@@ -39,7 +40,6 @@
     "eslint-config-next": "^14.2.33",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.18",
-    "typescript": "^5.9.3",
-    "wrangler": "^4.59.2"
+    "typescript": "^5.9.3"
   }
 }

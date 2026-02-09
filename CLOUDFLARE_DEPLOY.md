@@ -46,7 +46,7 @@ After that, every push to `main` will build with OpenNext and deploy to Cloudfla
 
 - Node.js 18+
 - A [Cloudflare account](https://dash.cloudflare.com/sign-up)
-- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/) (included as a dev dependency)
+- `@opennextjs/cloudflare` and `wrangler` are in **dependencies** (not devDependencies) so Cloudflare’s build installs them and `npx opennextjs-cloudflare build` runs correctly.
 
 ## Deploy from your machine
 
