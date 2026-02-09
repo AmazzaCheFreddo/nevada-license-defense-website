@@ -46,7 +46,7 @@ After that, every push to `main` will build with OpenNext and deploy to Cloudfla
 
 - Node.js 18+
 - A [Cloudflare account](https://dash.cloudflare.com/sign-up)
-- `@opennextjs/cloudflare` and `wrangler` are in **dependencies** (not devDependencies) so Cloudflare’s build installs them and `npx opennextjs-cloudflare build` runs correctly.
+- Use **build command:** `npm run build:cloudflare` (not `npx opennextjs-cloudflare build`) so the CLI runs from the installed package.
 
 ## Deploy from your machine
 
@@ -59,7 +59,7 @@ After that, every push to `main` will build with OpenNext and deploy to Cloudfla
 1. In [Cloudflare Dashboard](https://dash.cloudflare.com) go to **Workers & Pages**.
 2. Click **Create** → **Worker** (or **Connect to Git** for a new project).
 3. Connect your GitHub/GitLab repo and set:
-   - **Build command:** `npx opennextjs-cloudflare build`
+   - **Build command:** `npm run build:cloudflare`
    - **Deploy command:** `npx wrangler deploy` (default)
    - **Root directory:** leave blank unless the app lives in a subdirectory.
 
