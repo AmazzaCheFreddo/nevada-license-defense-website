@@ -1,0 +1,15 @@
+[
+  {
+    "id": "VIDEO_ID_1",
+    "title": "Video Title 1",
+    "description": "Video description",
+    "publishedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "VIDEO_ID_2",
+    "title": "Video Title 2",
+    "description": "Video description",
+    "publishedAt": "2024-01-02T00:00:00Z"
+  }
+]
+

@@ -3,18 +3,87 @@
 import { useState } from 'react'
 import Image from 'next/image'
 
+interface FormErrors {
+  firstName?: string
+  lastName?: string
+  email?: string
+  phone?: string
+  message?: string
+}
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
+    phone: '',
     message: '',
   })
+  const [errors, setErrors] = useState<FormErrors>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState<string>('')
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {}
+
+    // First Name validation
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is required'
+    } else if (formData.firstName.trim().length < 2) {
+      newErrors.firstName = 'First name must be at least 2 characters'
+    }
+
+    // Last Name validation
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last name is required'
+    } else if (formData.lastName.trim().length < 2) {
+      newErrors.lastName = 'Last name must be at least 2 characters'
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required'
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(formData.email.trim())) {
+        newErrors.email = 'Please enter a valid email address'
+      }
+    }
+
+    // Phone validation (optional but validate format if provided)
+    if (formData.phone.trim()) {
+      const phoneRegex = /^[\d\s\-\(\)\+\.]+$/
+      if (!phoneRegex.test(formData.phone.trim())) {
+        newErrors.phone = 'Please enter a valid phone number'
+      } else if (formData.phone.replace(/\D/g, '').length < 10) {
+        newErrors.phone = 'Phone number must contain at least 10 digits'
+      }
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required'
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters'
+    } else if (formData.message.trim().length > 2000) {
+      newErrors.message = 'Message must be less than 2000 characters'
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setErrors({})
+    setErrorMessage('')
+    
+    // Validate form before submission
+    if (!validateForm()) {
+      return
+    }
+
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
@@ -31,24 +100,52 @@ export default function ContactForm() {
 
       if (!response.ok) {
         const errorMsg = data.details ? `${data.error}: ${data.details}` : data.error || 'Failed to send message'
+        setErrorMessage(errorMsg)
         throw new Error(errorMsg)
       }
 
       setSubmitStatus('success')
-      setFormData({ firstName: '', lastName: '', email: '', message: '' })
+      setFormData({ firstName: '', lastName: '', email: '', phone: '', message: '' })
+      setErrors({})
+      
+      // Scroll to success message
+      setTimeout(() => {
+        const successElement = document.querySelector('[data-success-message]')
+        if (successElement) {
+          successElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+        }
+      }, 100)
     } catch (error) {
       console.error('Error submitting form:', error)
       setSubmitStatus('error')
+      if (!errorMessage) {
+        setErrorMessage('There was an error submitting your form. Please try again or call us directly.')
+      }
     } finally {
       setIsSubmitting(false)
     }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     })
+    
+    // Clear error for this field when user starts typing
+    if (errors[name as keyof FormErrors]) {
+      setErrors({
+        ...errors,
+        [name]: undefined,
+      })
+    }
+    
+    // Clear general error message when user starts typing
+    if (errorMessage) {
+      setErrorMessage('')
+    }
   }
 
   return (
@@ -62,7 +159,7 @@ export default function ContactForm() {
             </h2>
             <p className="text-lg text-gray-700 mb-8 max-w-3xl mx-auto">
               Whether it&apos;s talking on the phone or doing a video conference call, 
-              the initial consultation is free. Plan on about 30 to 45 minutes—we are very thorough!
+              the initial consultation is <em>always</em> free. Plan on about 30 to 45 minutes—we are very thorough!
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -120,8 +217,17 @@ export default function ContactForm() {
                       required
                       value={formData.firstName}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-light-gold focus:border-light-gold transition-all duration-300 ease-in-out"
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-light-gold focus:border-light-gold transition-all duration-300 ease-in-out ${
+                        errors.firstName ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'
+                      }`}
+                      aria-invalid={errors.firstName ? 'true' : 'false'}
+                      aria-describedby={errors.firstName ? 'firstName-error' : undefined}
                     />
+                    {errors.firstName && (
+                      <p id="firstName-error" className="mt-1 text-sm text-red-600" role="alert">
+                        {errors.firstName}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="lastName" className="block text-sm font-bold text-gray-700 mb-2">
@@ -134,8 +240,17 @@ export default function ContactForm() {
                       required
                       value={formData.lastName}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-light-gold focus:border-light-gold transition-all duration-300 ease-in-out"
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-light-gold focus:border-light-gold transition-all duration-300 ease-in-out ${
+                        errors.lastName ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'
+                      }`}
+                      aria-invalid={errors.lastName ? 'true' : 'false'}
+                      aria-describedby={errors.lastName ? 'lastName-error' : undefined}
                     />
+                    {errors.lastName && (
+                      <p id="lastName-error" className="mt-1 text-sm text-red-600" role="alert">
+                        {errors.lastName}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -150,8 +265,41 @@ export default function ContactForm() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-light-gold focus:border-light-gold transition-all duration-300 ease-in-out"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-light-gold focus:border-light-gold transition-all duration-300 ease-in-out ${
+                      errors.email ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'
+                    }`}
+                    aria-invalid={errors.email ? 'true' : 'false'}
+                    aria-describedby={errors.email ? 'email-error' : undefined}
                   />
+                  {errors.email && (
+                    <p id="email-error" className="mt-1 text-sm text-red-600" role="alert">
+                      {errors.email}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-bold text-gray-700 mb-2">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="(702) 555-1234"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-light-gold focus:border-light-gold transition-all duration-300 ease-in-out ${
+                      errors.phone ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'
+                    }`}
+                    aria-invalid={errors.phone ? 'true' : 'false'}
+                    aria-describedby={errors.phone ? 'phone-error' : undefined}
+                  />
+                  {errors.phone && (
+                    <p id="phone-error" className="mt-1 text-sm text-red-600" role="alert">
+                      {errors.phone}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -165,8 +313,22 @@ export default function ContactForm() {
                     rows={6}
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-light-gold focus:border-light-gold resize-none transition-all duration-300 ease-in-out"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-light-gold focus:border-light-gold resize-none transition-all duration-300 ease-in-out ${
+                      errors.message ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'
+                    }`}
+                    aria-invalid={errors.message ? 'true' : 'false'}
+                    aria-describedby={errors.message ? 'message-error' : undefined}
                   />
+                  <div className="flex justify-between items-center mt-1">
+                    {errors.message && (
+                      <p id="message-error" className="text-sm text-red-600" role="alert">
+                        {errors.message}
+                      </p>
+                    )}
+                    <p className={`text-xs ml-auto ${formData.message.length > 2000 ? 'text-red-600' : 'text-gray-500'}`}>
+                      {formData.message.length}/2000 characters
+                    </p>
+                  </div>
                 </div>
 
                 <button
@@ -178,14 +340,37 @@ export default function ContactForm() {
                 </button>
 
                 {submitStatus === 'success' && (
-                  <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
-                    Thank you! We&apos;ll contact you soon to schedule a consultation.
+                  <div 
+                    data-success-message
+                    className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800 animate-fade-in"
+                    role="alert"
+                  >
+                    <div className="flex items-start gap-3">
+                      <svg className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <div>
+                        <p className="font-semibold">Thank you for contacting us!</p>
+                        <p className="text-sm mt-1">We&apos;ll contact you soon to schedule a consultation.</p>
+                      </div>
+                    </div>
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
-                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-                    There was an error submitting your form. Please try again or call us directly.
+                  <div 
+                    className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 animate-fade-in"
+                    role="alert"
+                  >
+                    <div className="flex items-start gap-3">
+                      <svg className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <div>
+                        <p className="font-semibold">Error submitting form</p>
+                        <p className="text-sm mt-1">{errorMessage || 'There was an error submitting your form. Please try again or call us directly.'}</p>
+                      </div>
+                    </div>
                   </div>
                 )}
               </form>

@@ -48,6 +48,14 @@ export default function Hero() {
         />
       </div>
 
+      {/* Gradient Overlay for Text Contrast - darker at top, transparent at bottom */}
+      <div 
+        className="absolute inset-0 z-[25]" 
+        style={{ 
+          background: 'linear-gradient(to bottom, rgba(18, 32, 59, 0.5) 0%, rgba(18, 32, 59, 0.3) 40%, transparent 70%)' 
+        }} 
+      />
+
       {/* Content Overlay */}
       <div className="relative z-30 h-full flex items-center">
         <div className="section-container w-full">

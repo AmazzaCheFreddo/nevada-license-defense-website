@@ -32,8 +32,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const imageUrl = post.image ? `${siteUrl}${post.image}` : `${siteUrl}/images/NEVADA LICENSE DEFENSE LOGO.png`
 
   return {
-    title: `${post.title} | Nevada License Defense Blog`,
-    description: post.excerpt || `Read about ${post.title} on the Nevada License Defense blog.`,
+    title: `${post.title} | Nevada License Defense Articles`,
+    description: post.excerpt || `Read about ${post.title} on the Nevada License Defense articles.`,
     authors: [{ name: post.author }],
     openGraph: {
       title: post.title,
@@ -128,7 +128,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     <article className="section-padding bg-white">
       <div className="section-container">
         <div className="max-w-4xl mx-auto">
-          {/* Back to Blog */}
+          {/* Back to Articles */}
           <Link
             href="/blog"
             className="inline-flex items-center text-dark-blue hover:text-dark-gold mb-6 transition-colors"
@@ -144,7 +144,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             >
               <path d="M15 19l-7-7 7-7" />
             </svg>
-            Back to Blog
+            Back to Articles
           </Link>
 
           {/* Header */}

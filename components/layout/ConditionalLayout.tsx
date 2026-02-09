@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation'
 import Header from './Header'
 import Footer from './Footer'
+import FloatingContactForm from './FloatingContactForm'
 
 export default function ConditionalLayout({
   children,
@@ -11,6 +12,10 @@ export default function ConditionalLayout({
 }) {
   const pathname = usePathname()
   const isAdminRoute = pathname?.startsWith('/admin')
+  const isContactPage = pathname === '/contact'
+  
+  // Show floating form on all pages except contact page and admin routes
+  const showFloatingForm = !isAdminRoute && !isContactPage
 
   return (
     <>
@@ -19,6 +24,7 @@ export default function ConditionalLayout({
         {children}
       </main>
       {!isAdminRoute && <Footer />}
+      {showFloatingForm && <FloatingContactForm />}
     </>
   )
 }

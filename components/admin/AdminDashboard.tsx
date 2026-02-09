@@ -28,6 +28,8 @@ export default function AdminDashboard() {
   const [success, setSuccess] = useState('')
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [loadingPosts, setLoadingPosts] = useState(true)
+  const [refreshingReviews, setRefreshingReviews] = useState(false)
+  const [reviewRefreshStatus, setReviewRefreshStatus] = useState<{ type: 'success' | 'error' | null, message: string }>({ type: null, message: '' })
 
   useEffect(() => {
     fetchPosts()
@@ -237,6 +239,35 @@ export default function AdminDashboard() {
     router.refresh()
   }
 
+  const handleRefreshReviews = async () => {
+    setRefreshingReviews(true)
+    setReviewRefreshStatus({ type: null, message: '' })
+    
+    try {
+      const response = await fetch('/api/google-reviews/refresh?count=5')
+      const data = await response.json()
+      
+      if (response.ok) {
+        setReviewRefreshStatus({
+          type: 'success',
+          message: `Successfully refreshed reviews! ${data.stats.uniqueNewReviewsAdded} new reviews added. Total: ${data.stats.totalArchived} reviews in archive.`
+        })
+      } else {
+        setReviewRefreshStatus({
+          type: 'error',
+          message: data.error || 'Failed to refresh reviews'
+        })
+      }
+    } catch (err) {
+      setReviewRefreshStatus({
+        type: 'error',
+        message: 'An error occurred while refreshing reviews'
+      })
+    } finally {
+      setRefreshingReviews(false)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 section-padding">
       <div className="max-w-7xl mx-auto">
@@ -245,7 +276,7 @@ export default function AdminDashboard() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-dark-blue mb-2">Admin Dashboard</h1>
-              <p className="text-gray-600">Manage your blog posts</p>
+              <p className="text-gray-600">Manage your blog posts and website content</p>
             </div>
             <div className="flex gap-4">
               <Link
@@ -260,6 +291,55 @@ export default function AdminDashboard() {
               >
                 Logout
               </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Admin Tools Section */}
+        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+          <h2 className="text-2xl font-bold text-dark-blue mb-4">Admin Tools</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Reviews Refresh */}
+            <div className="border border-gray-200 rounded-lg p-4">
+              <h3 className="text-lg font-bold text-dark-blue mb-2">Google Reviews</h3>
+              <p className="text-sm text-gray-600 mb-4">
+                Manually refresh reviews from Google. New reviews are automatically added every 30 minutes, but you can force an immediate refresh here.
+              </p>
+              {reviewRefreshStatus.type && (
+                <div className={`mb-4 p-3 rounded-lg text-sm ${
+                  reviewRefreshStatus.type === 'success' 
+                    ? 'bg-green-50 border border-green-200 text-green-700' 
+                    : 'bg-red-50 border border-red-200 text-red-700'
+                }`}>
+                  {reviewRefreshStatus.message}
+                </div>
+              )}
+              <button
+                onClick={handleRefreshReviews}
+                disabled={refreshingReviews}
+                className="bg-light-gold text-dark-blue px-6 py-2 rounded-lg font-bold hover:bg-dark-gold hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {refreshingReviews ? 'Refreshing...' : 'Refresh Reviews Now'}
+              </button>
+            </div>
+
+            {/* Quick Links */}
+            <div className="border border-gray-200 rounded-lg p-4">
+              <h3 className="text-lg font-bold text-dark-blue mb-2">Quick Links</h3>
+              <div className="space-y-2">
+                <Link
+                  href="/admin/reviews-import"
+                  className="block px-4 py-2 bg-dark-blue text-white rounded-lg hover:bg-opacity-90 transition-colors text-sm font-semibold text-center"
+                >
+                  Import Reviews Manually
+                </Link>
+                <Link
+                  href="/admin/google-business-setup"
+                  className="block px-4 py-2 border border-dark-blue text-dark-blue rounded-lg hover:bg-dark-blue hover:text-white transition-colors text-sm font-semibold text-center"
+                >
+                  Google Business Setup
+                </Link>
+              </div>
             </div>
           </div>
         </div>

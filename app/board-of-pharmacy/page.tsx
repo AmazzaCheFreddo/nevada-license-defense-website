@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function BoardOfPharmacyPage() {
   return (
-    <div className="section-padding">
+    <div className="section-padding bg-white">
       <div className="section-container">
         <div>
           {/* Image at top - Seal/Logo */}

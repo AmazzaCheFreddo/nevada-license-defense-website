@@ -41,6 +41,15 @@
     @apply py-16 md:py-24;
   }
 
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+
   .animate-on-scroll {
     @apply opacity-0;
     animation: fadeIn 0.8s ease-out forwards;

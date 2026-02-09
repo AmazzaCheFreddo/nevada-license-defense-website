@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function ServicesPage() {
   return (
-    <div className="section-padding">
+    <div className="section-padding bg-white">
       <div className="section-container">
         <div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 text-center">
@@ -143,7 +143,7 @@ loading="lazy"
             </div>
           </div>
 
-          <div className="bg-primary-50 p-8 rounded-lg">
+          <div className="bg-gray-50 p-8 rounded-lg">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Other Professional Licenses</h2>
             <p className="text-gray-700 mb-6">
               If you hold a professional license in Nevada and are facing disciplinary action 

@@ -7,7 +7,7 @@ export default function BoardOfMedicalExaminersPage() {
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
-    <div className="section-padding">
+    <div className="section-padding bg-white">
       <div className="section-container">
         <div>
           {/* Image at top - Seal/Logo */}

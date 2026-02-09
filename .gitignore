@@ -30,12 +30,18 @@ yarn-error.log*
 # vercel
 .vercel
 
+# OpenNext / Cloudflare
+.open-next
+.cloudflare
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
 # Exclude files with extremely long filenames (Windows path limit)
 public/images/filler images/african-american-osteopath-pointing-human-skeleton-explain-bones-disease-diagnosis-senior-patient-checkup-visit-anatomy-specialist-showing-spinal-cord-osteopathy-examination.jpg
+# Shorter pattern for same file (in case full path causes issues on Windows)
+public/images/filler images/african-american-osteopath*
 
 
 

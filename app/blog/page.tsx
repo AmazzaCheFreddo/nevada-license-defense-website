@@ -2,12 +2,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getAllPosts } from '@/lib/blog'
 import { format } from 'date-fns'
+import MiniContactForm from '@/components/sections/MiniContactForm'
 
 export const metadata = {
-  title: 'Blog | Nevada License Defense',
+  title: 'Articles | Nevada License Defense',
   description: 'Stay informed about professional license defense in Nevada. Read our latest articles on board procedures, legal updates, and license defense strategies.',
   openGraph: {
-    title: 'Blog | Nevada License Defense',
+    title: 'Articles | Nevada License Defense',
     description: 'Stay informed about professional license defense in Nevada.',
     type: 'website',
   },
@@ -23,7 +24,7 @@ export default function BlogPage() {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-dark-blue mb-4">
-              Blog
+              Articles
             </h1>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Stay informed about professional license defense in Nevada. 
@@ -31,17 +32,17 @@ export default function BlogPage() {
             </p>
           </div>
 
-          {/* Blog Posts Grid */}
+          {/* Articles Grid with Contact Form */}
           {posts.length === 0 ? (
             <div className="bg-gray-50 p-12 rounded-lg text-center">
               <p className="text-lg text-gray-600">
-                Blog posts coming soon. Check back for updates on professional license defense, 
+                Articles coming soon. Check back for updates on professional license defense, 
                 board procedures, and legal updates.
               </p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post) => (
+              {posts.map((post, index) => (
                 <article
                   key={post.slug}
                   className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col"
@@ -108,6 +109,13 @@ export default function BlogPage() {
                   </div>
                 </article>
               ))}
+              
+              {/* Mini Contact Form Card - Inserted after 3rd post */}
+              {posts.length > 2 && (
+                <div key="contact-form" className="md:col-span-2 lg:col-span-1">
+                  <MiniContactForm />
+                </div>
+              )}
             </div>
           )}
         </div>

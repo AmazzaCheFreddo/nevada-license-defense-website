@@ -4,12 +4,36 @@ import { Resend } from 'resend'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { firstName, lastName, email, message } = body
+    const { firstName, lastName, email, phone, message } = body
 
     // Validate required fields
     if (!firstName || !lastName || !email || !message) {
       return NextResponse.json(
-        { error: 'All fields are required' },
+        { error: 'All required fields must be filled' },
+        { status: 400 }
+      )
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: 'Invalid email format' },
+        { status: 400 }
+      )
+    }
+
+    // Validate message length
+    if (message.trim().length < 10) {
+      return NextResponse.json(
+        { error: 'Message must be at least 10 characters' },
+        { status: 400 }
+      )
+    }
+
+    if (message.trim().length > 2000) {
+      return NextResponse.json(
+        { error: 'Message must be less than 2000 characters' },
         { status: 400 }
       )
     }
@@ -48,8 +72,9 @@ export async function POST(request: NextRequest) {
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${firstName} ${lastName}</p>
         <p><strong>Email:</strong> ${email}</p>
+        ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ''}
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <p>${message.replace(/\n/g, '<br>').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
         <hr>
         <p><em>This email was sent from the Nevada License Defense contact form.</em></p>
       `,

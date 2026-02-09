@@ -43,6 +43,128 @@ export default function NevadaStateBoardOfNursingPage() {
             </ul>
           </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+              <Image
+                src="/images/filler images/medium-shot-smiley-doctor-patient.jpg"
+                alt="Professional nurse in blue scrubs"
+                width={600}
+                height={300}
+                className="w-full h-80 object-cover"
+                quality={85}
+                loading="lazy"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-dark-blue mb-3">
+                  Professional Nursing Care
+                </h3>
+                <p className="text-gray-700">
+                  Nurses play a vital role in healthcare, providing compassionate care and ensuring patient safety.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+              <Image
+                src="/images/filler images/african-american-nurse-using-digital-tablet-treatment.jpg"
+                alt="Nurse reviewing medical x-rays"
+                width={600}
+                height={300}
+                className="w-full h-80 object-cover"
+                quality={85}
+                loading="lazy"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-dark-blue mb-3">
+                  Medical Documentation
+                </h3>
+                <p className="text-gray-700">
+                  Proper documentation and review of medical records is essential for maintaining professional standards.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+              <Image
+                src="/images/filler images/medium-shot-nurses-taking-care-patient.jpg"
+                alt="Nurses taking care of patient"
+                width={600}
+                height={300}
+                className="w-full h-80 object-cover"
+                quality={85}
+                loading="lazy"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-dark-blue mb-3">
+                  Patient Assessment
+                </h3>
+                <p className="text-gray-700">
+                  Accurate patient assessment and record-keeping are critical components of nursing practice.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+              <Image
+                src="/images/filler images/young-doctor-reading-notes-clipboard.jpg"
+                alt="Healthcare professional reviewing notes"
+                width={600}
+                height={300}
+                className="w-full h-80 object-cover"
+                quality={85}
+                loading="lazy"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-dark-blue mb-3">
+                  Compliance & Regulations
+                </h3>
+                <p className="text-gray-700">
+                  Understanding and adhering to nursing regulations is crucial for maintaining your license.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+              <Image
+                src="/images/filler images/nurse-with-patient-osteopathy-session.jpg"
+                alt="Nurse providing patient care"
+                width={600}
+                height={300}
+                className="w-full h-80 object-cover"
+                quality={85}
+                loading="lazy"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-dark-blue mb-3">
+                  Patient Care Excellence
+                </h3>
+                <p className="text-gray-700">
+                  Providing quality patient care while maintaining professional standards is the foundation of nursing practice.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+              <Image
+                src="/images/filler images/female-doctors-talking-work.jpg"
+                alt="Healthcare professionals communicating"
+                width={600}
+                height={300}
+                className="w-full h-80 object-cover"
+                quality={85}
+                loading="lazy"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-dark-blue mb-3">
+                  Professional Communication
+                </h3>
+                <p className="text-gray-700">
+                  Effective communication with patients and colleagues is essential for professional nursing practice.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="bg-light-gold/10 border-l-4 border-light-gold p-6 mb-12 rounded-r-lg">
             <h2 className="text-2xl font-bold text-dark-blue mb-4">
               You might be wondering when should you contact an attorney for help or advice...
@@ -78,7 +200,7 @@ export default function NevadaStateBoardOfNursingPage() {
             <div className="space-y-8">
               <div className="border-b border-gray-200 pb-6">
                 <h3 className="text-xl font-bold text-dark-blue mb-3">
-                  I think I&apos;m going to be reported for something I did at work.
+                  &ldquo;I think I&apos;m going to be reported for something I did at work.&rdquo;
                 </h3>
                 <p className="text-gray-700">
                   Let&apos;s talk about it. You can begin to plan on next steps, and work with 
@@ -90,7 +212,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
               <div className="border-b border-gray-200 pb-6">
                 <h3 className="text-xl font-bold text-dark-blue mb-3">
-                  I was arrested for something (DUI or Domestic Violence, for example).
+                  &ldquo;I was arrested for something (DUI or Domestic Violence, for example).&rdquo;
                 </h3>
                 <p className="text-gray-700">
                   We can give you sound advice. For example, did you know that arrests do not 
@@ -101,7 +223,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
               <div className="border-b border-gray-200 pb-6">
                 <h3 className="text-xl font-bold text-dark-blue mb-3">
-                  My employer told me to self-report.
+                  &ldquo;My employer told me to self-report.&rdquo;
                 </h3>
                 <p className="text-gray-700">
                   This is a common suggestion that needs to be carefully discussed with an 
@@ -112,7 +234,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
               <div className="border-b border-gray-200 pb-6">
                 <h3 className="text-xl font-bold text-dark-blue mb-3">
-                  My employer said they&apos;re going to contact the Board.
+                  &ldquo;My employer said they&apos;re going to contact the Board.&rdquo;
                 </h3>
                 <p className="text-gray-700">
                   This is an excellent time to contact legal counsel and find out how to proceed 
@@ -122,7 +244,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
               <div className="border-b border-gray-200 pb-6">
                 <h3 className="text-xl font-bold text-dark-blue mb-3">
-                  I received a Notice of Investigation from a Nursing Board Investigator.
+                  &ldquo;I received a Notice of Investigation from a Nursing Board Investigator.&rdquo;
                 </h3>
                 <p className="text-gray-700">
                   The notice of investigation (NOI) was sent out by an NSBN investigator. The 
@@ -134,7 +256,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
               <div className="border-b border-gray-200 pb-6">
                 <h3 className="text-xl font-bold text-dark-blue mb-3">
-                  Someone called me from the Board and I don&apos;t know if I should talk to them or call back.
+                  &ldquo;Someone called me from the Board and I don&apos;t know if I should talk to them or call back.&rdquo;
                 </h3>
                 <p className="text-gray-700">
                   Anything you say to the Board can and will be used against you if you 
@@ -146,7 +268,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
               <div className="border-b border-gray-200 pb-6">
                 <h3 className="text-xl font-bold text-dark-blue mb-3">
-                  Somebody reported me to the State Board of Nursing
+                  &ldquo;Somebody reported me to the State Board of Nursing&rdquo;
                 </h3>
                 <p className="text-gray-700">
                   Find out if being reported will result in receiving an NOI and what you should 
@@ -156,7 +278,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
               <div className="border-b border-gray-200 pb-6">
                 <h3 className="text-xl font-bold text-dark-blue mb-3">
-                  I quit my job rather than face termination.
+                  &ldquo;I quit my job rather than face termination.&rdquo;
                 </h3>
                 <p className="text-gray-700">
                   Many nurses who lose their jobs over an alleged act of unprofessional conduct 
@@ -168,7 +290,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
               <div className="border-b border-gray-200 pb-6">
                 <h3 className="text-xl font-bold text-dark-blue mb-3">
-                  I want to get my license back.
+                  &ldquo;I want to get my license back.&rdquo;
                 </h3>
                 <p className="text-gray-700">
                   If you have already lost your license through inactivity, voluntary surrender, 
@@ -178,7 +300,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
               <div className="border-b border-gray-200 pb-6">
                 <h3 className="text-xl font-bold text-dark-blue mb-3">
-                  I am not comfortable with what my employer is asking me to do.
+                  &ldquo;I am not comfortable with what my employer is asking me to do.&rdquo;
                 </h3>
                 <p className="text-gray-700">
                   Not all employers or supervisors are ethical. Don&apos;t let common, unprofessional 
@@ -189,7 +311,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
               <div className="border-b border-gray-200 pb-6">
                 <h3 className="text-xl font-bold text-dark-blue mb-3">
-                  I was found guilty of a crime, how will it affect my license?
+                  &ldquo;I was found guilty of a crime, how will it affect my license?&rdquo;
                 </h3>
                 <p className="text-gray-700">
                   Convictions for a crime must be handled properly. Remember, the Board must decide 
@@ -200,7 +322,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
               <div className="pb-6">
                 <h3 className="text-xl font-bold text-dark-blue mb-3">
-                  Fill in your questions here...
+                  &ldquo;Fill in your questions here...&rdquo;
                 </h3>
                 <p className="text-gray-700">
                   We can&apos;t possibly list here all of the questions you may have that would prompt 

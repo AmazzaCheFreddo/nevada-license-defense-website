@@ -13,9 +13,21 @@
 - Incorporate visual ease animations on elements to provide a sophisticated, modern look
 
 ## Visual Hierarchy Rules
+- **Equal Visual Weight/Hierarchy**: Always aim for equal visual weight and hierarchy across similar elements. Each element of the same type should have the same visual importance, size, spacing, and treatment. Avoid layouts where one element appears to "float alone" or has disproportionate visual weight compared to others.
 - Use equal column sizes when creating multi-column layouts for visual balance
 - Maintain consistent spacing and alignment across similar elements
 - Ensure visual balance in grid layouts - avoid lopsided or uneven column distributions
+- When displaying multiple items of the same type (cards, services, features, etc.), ensure they all have equal visual treatment - same image sizes, same text area sizes, same padding, same spacing between items
+
+## Visual Consistency & Professional Layout Rules
+- **Visual Consistency is Key**: All similar elements must maintain consistent sizing, spacing, and styling throughout the site
+- **Professional Layouts**: Maintain clean, organized, and professional appearance at all times
+- **Consistent Character Limits**: When displaying text content (reviews, excerpts, descriptions), use consistent character/word limits across all instances
+- **Uniform Card Sizes**: Cards, boxes, and containers displaying similar content should have consistent dimensions and padding
+- **Consistent Typography**: Use the same font sizes, weights, and line heights for similar content types
+- **Uniform Spacing**: Maintain consistent margins and padding between similar elements
+- **Consistent Interactive Elements**: Buttons, links, and interactive elements of the same type should have identical styling and behavior
+- **Professional Aesthetics**: Prioritize clean, modern, and sophisticated design over flashy or cluttered layouts
 
 ## Code Style Preferences
 
@@ -88,6 +100,14 @@
 - Update related files if making structural changes
 - Check for linting errors after changes
 - Ensure responsive design still works after changes
+- **Full Functionality Required**: All changes must be implemented with complete, working functionality - no placeholders, incomplete features, or "coming soon" elements
+- **Test Before Presenting**: Every change must be tested and debugged thoroughly before being presented to the user
+- **Verify All Features**: Ensure all interactive elements work correctly (buttons, links, forms, carousels, etc.)
+- **Check Data Flow**: Verify that data is being fetched, displayed, and updated correctly
+- **Test Edge Cases**: Consider and test edge cases (empty data, errors, loading states, etc.)
+- **Cross-Browser Testing**: Ensure functionality works across different browsers when possible
+- **Responsive Testing**: Test on mobile, tablet, and desktop viewports
+- **Debug Issues**: If issues are found, debug and fix them before presenting the solution
 
 ## Testing Considerations
 - Write code that's easy to test (though we're not writing tests yet)
@@ -97,7 +117,8 @@
 ## Development Workflow
 - **ALWAYS start the development server when Cursor resets/reopens or when beginning a new session**
 - Run `npm run dev` (or use the VS Code task "Start Dev Server") to start the local development server
-- The server should be running on `http://localhost:3000` before making changes that need to be previewed
+- The server should be running on `http://localhost:3333` before making changes that need to be previewed
 - If the server is not running, start it immediately at the beginning of any coding session
+- The Next.js dev server automatically watches for file changes and restarts/reloads when code is modified - no manual restart needed
 
 

@@ -19,7 +19,7 @@ const navigation = [
   { name: 'Board of Pharmacy', href: '/board-of-pharmacy' },
   { name: 'Board of Medical Examiners', href: '/board-of-medical-examiners' },
   { name: 'More Services', href: '/services' },
-  { name: 'Blog', href: '/blog' },
+  { name: 'Articles', href: '/blog' },
   { name: 'Contact', href: '/contact' },
 ]
 
@@ -163,13 +163,13 @@ export default function Header() {
     </header>
     
     {/* Sticky Navigation Bar - Separate from header */}
-    <div className="hidden lg:block bg-white border-t border-gray-200 sticky top-0 z-50">
-      <div className="section-container">
-        <div className="flex items-center justify-center space-x-8 py-4">
+    <div className="hidden lg:block bg-white border-t border-gray-200 sticky top-0 z-[99]">
+      <div className="section-container relative">
+        <div className="flex items-center justify-center flex-nowrap space-x-4 xl:space-x-6 py-4">
           {navigation.map((item) => (
             <div
               key={item.name}
-              className="relative"
+              className="relative flex-shrink-0"
               ref={(el) => {
                 if (item.submenu) {
                   dropdownRefs.current[item.name] = el
@@ -180,11 +180,11 @@ export default function Header() {
                 <>
                   <button
                     onClick={() => toggleSubmenu(item.name)}
-                    className="text-gray-700 hover:text-dark-blue font-bold transition-all duration-300 ease-in-out relative group flex items-center uppercase text-sm"
+                    className="text-gray-700 hover:text-dark-blue font-bold transition-all duration-300 ease-in-out relative group flex items-center uppercase text-sm whitespace-nowrap"
                   >
                     {item.name}
                     <svg
-                      className={`w-4 h-4 ml-1 transform transition-transform duration-300 ${
+                      className={`w-4 h-4 ml-1 transform transition-transform duration-300 flex-shrink-0 ${
                         activeSubmenu === item.name ? 'rotate-180' : ''
                       }`}
                       fill="none"
@@ -199,12 +199,12 @@ export default function Header() {
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-light-gold group-hover:w-full transition-all duration-300 ease-in-out"></span>
                   </button>
                     {activeSubmenu === item.name && (
-                      <div className="absolute left-0 mt-2 w-auto min-w-max bg-white rounded-lg shadow-xl border border-gray-200 py-2 animate-scale-in z-50">
+                      <div className="absolute left-0 top-full mt-2 w-auto min-w-max bg-white rounded-lg shadow-xl border border-gray-200 py-2 animate-scale-in z-[9999]">
                       {item.submenu.map((subitem) => (
                         <Link
                           key={subitem.name}
                           href={subitem.href}
-                          className="block px-4 py-2 text-gray-700 hover:bg-light-gold hover:text-dark-blue transition-all duration-300 ease-in-out font-semibold"
+                          className="block px-4 py-2 text-gray-700 hover:bg-light-gold hover:text-dark-blue transition-all duration-300 ease-in-out font-semibold whitespace-nowrap"
                           onClick={() => setActiveSubmenu(null)}
                         >
                           {subitem.name}
@@ -216,7 +216,7 @@ export default function Header() {
               ) : (
                 <Link
                   href={item.href}
-                  className="text-gray-700 hover:text-dark-blue font-bold transition-all duration-300 ease-in-out relative group uppercase text-sm"
+                  className="text-gray-700 hover:text-dark-blue font-bold transition-all duration-300 ease-in-out relative group uppercase text-sm whitespace-nowrap"
                 >
                   {item.name}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-light-gold group-hover:w-full transition-all duration-300 ease-in-out"></span>
@@ -228,10 +228,10 @@ export default function Header() {
           {/* Call button - After Contact */}
           <a
             href="tel:7028934777"
-            className="flex items-center gap-2 bg-dark-blue text-white px-4 py-2 rounded-lg font-bold hover:bg-opacity-90 transition-all duration-300 ml-4"
+            className="flex items-center gap-2 bg-dark-blue text-white px-4 py-2 rounded-lg font-bold hover:bg-opacity-90 transition-all duration-300 ml-4 flex-shrink-0 whitespace-nowrap"
           >
             <svg
-              className="w-5 h-5"
+              className="w-5 h-5 flex-shrink-0"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"

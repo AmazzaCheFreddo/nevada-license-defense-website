@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Footer() {
   return (
@@ -7,7 +8,19 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About */}
           <div className="animate-fade-in">
-            <h3 className="text-white text-lg font-bold mb-4">Nevada License Defense</h3>
+            <div className="mb-4">
+              <Link href="/" className="block">
+                <Image
+                  src="/images/NEVADA LICENSE DEFENSE LOGO-WHITE.png"
+                  alt="Nevada License Defense Logo"
+                  width={300}
+                  height={90}
+                  quality={95}
+                  className="h-auto w-full max-w-[300px]"
+                  sizes="(max-width: 768px) 250px, 300px"
+                />
+              </Link>
+            </div>
             <p className="text-sm">
               We are a dedicated law firm focused on protecting professional licenses in Nevada. 
               Our team of experienced professionals is committed to providing the highest level 
@@ -36,7 +49,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/blog" className="hover:text-light-gold transition-all duration-300 ease-in-out font-semibold">
-                  Blog
+                  Articles
                 </Link>
               </li>
               <li>

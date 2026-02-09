@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 // Nursing Icon - Heart with heartbeat monitor line (stroke-based)
 const NursingIcon = ({ className }: { className?: string }) => (
@@ -99,18 +100,24 @@ const services = [
     description: 'We provide legal representation and guidance for nurses facing license issues.',
     href: '/board-of-nursing/nevada-state-board-of-nursing',
     icon: <NursingIcon className="w-16 h-16 text-dark-blue" />,
+    image: '/images/filler images/female_nurse_blue_closeup.jpg',
+    imageAlt: 'Professional nurse in blue scrubs',
   },
   {
     title: 'Nevada Board of Pharmacy (NSBP)',
     description: 'Our experienced attorneys will fight for your pharmacy license.',
     href: '/board-of-pharmacy',
     icon: <PharmacyIcon className="w-16 h-16 text-dark-blue" />,
+    image: '/images/filler images/medications_pillpouches.jpg',
+    imageAlt: 'Pharmacy medications and pill pouches',
   },
   {
     title: 'Medical Nevada State Board of Medical Examiners (NSBME)',
     description: 'We specialize in protecting the licenses of medical professionals in Nevada.',
     href: '/board-of-medical-examiners',
     icon: <MedicalIcon className="w-14 h-14 text-dark-blue" />,
+    image: '/images/filler images/doctor_stethoscope.jpg',
+    imageAlt: 'Doctor with stethoscope',
   },
 ]
 
@@ -142,7 +149,7 @@ export default function Services() {
               <p className="text-gray-600 mb-6">{service.description}</p>
               <Link
                 href={service.href}
-                className="text-dark-blue font-bold hover:text-light-gold transition-all duration-300 ease-in-out inline-flex items-center group"
+                className="text-dark-blue font-bold hover:text-light-gold transition-all duration-300 ease-in-out inline-flex items-center group mb-6"
               >
                 Learn More
                 <svg
@@ -157,6 +164,15 @@ export default function Services() {
                   <path d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
+              <div className="mt-6 overflow-hidden rounded-lg shadow-md">
+                <Image
+                  src={service.image}
+                  alt={service.imageAlt}
+                  width={400}
+                  height={250}
+                  className="w-full h-48 object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+                />
+              </div>
             </div>
           ))}
         </div>
