@@ -77,6 +77,36 @@ npm run preview
 
 This runs `opennextjs-cloudflare build` then serves the app with Wrangler. For everyday development, `npm run dev` is still fine.
 
+## Troubleshooting: You see "Hello World" instead of your site
+
+That usually means the **Worker** running at that URL is still the default template, not your Next.js app. Check the following:
+
+1. **Project type**  
+   In **Workers & Pages**, your project must be a **Worker** connected to Git (not a plain "Pages" site and not a Worker created from the "Create Worker" Hello World template without Git). The Git pipeline should run your **build** and then **deploy** that build.
+
+2. **Last deployment**  
+   Open your project → **Deployments**. The latest deployment should be **Successful**. Open it and check the logs:
+   - The **build** step should run `npm run build:cloudflare` and finish without errors (OpenNext building your Next.js app).
+   - A **deploy** step should run after the build (e.g. `wrangler deploy`). If there is no deploy step, or it fails, the Worker won’t be updated and you’ll keep seeing Hello World.
+
+3. **Build and deploy commands**  
+   In the project **Settings** (or Build configuration):
+   - **Build command:** `npm run build:cloudflare`
+   - **Deploy command:** `npx wrangler deploy` (or `wrangler deploy` if the CLI is in PATH)
+
+   If the deploy command is missing or different, the built Next.js app may never be deployed.
+
+4. **Deploy once from your machine**  
+   To confirm the app can deploy and to see the real site:
+   ```bash
+   npx wrangler login
+   npm run deploy
+   ```
+   When it finishes, it will print the Worker URL. Open that URL; you should see your Nevada License Defense site. If you do, the problem is with the Git pipeline (build or deploy not running/failing). If you still see Hello World, say what URL you’re opening (e.g. `xxx.pages.dev` vs `xxx.workers.dev`).
+
+5. **URL you’re opening**  
+   Make sure you’re opening the **Worker** URL (often `your-project.workers.dev` or a custom domain linked to that Worker), not a different Pages or Worker that still has the default page.
+
 ## Notes
 
 - **Image optimization:** Handled by Cloudflare’s image resizing (configured via the `IMAGES` binding in `wrangler.jsonc`).
