@@ -47,7 +47,7 @@ export default function BoardOfPharmacyPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
               <Image
-                src="/images/filler images/african-american-nurse-using-digital-tablet-treatment.jpg"
+                src="/images/filler images/female_doctor_reviewing_clipboard.jpg"
                 alt="Nurse using digital tablet"
                 width={600}
                 height={300}
@@ -67,7 +67,7 @@ export default function BoardOfPharmacyPage() {
 
             <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
               <Image
-                src="/images/filler images/medicine-doctors-working-table.jpg"
+                src="/images/filler images/worried-tired-doctor-working-late-pressure-find-cure-illness.jpg"
                 alt="Doctors working at table"
                 width={600}
                 height={300}
@@ -87,7 +87,7 @@ export default function BoardOfPharmacyPage() {
 
             <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
               <Image
-                src="/images/filler images/young-doctor-reading-notes-clipboard.jpg"
+                src="/images/filler images/female-pharmacist-scanning-medicine-counter.jpg"
                 alt="Doctor reading notes on clipboard"
                 width={600}
                 height={300}
@@ -107,7 +107,7 @@ export default function BoardOfPharmacyPage() {
 
             <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
               <Image
-                src="/images/filler images/physician-writing-prescription-treatment-plan-help-with-recovery.jpg"
+                src="/images/filler images/pharmacy_old_fashioned_2.jpg"
                 alt="Physician writing prescription"
                 width={600}
                 height={300}
@@ -147,7 +147,7 @@ export default function BoardOfPharmacyPage() {
 
             <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
               <Image
-                src="/images/filler images/pharmacy_old_fashioned.jpg"
+                src="/images/filler images/freepik__pharmacist-looking-stressed-dim-fluorescent-pharma__94743.jpeg"
                 alt="Pharmacy setting"
                 width={600}
                 height={300}

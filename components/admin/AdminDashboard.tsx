@@ -28,6 +28,7 @@ export default function AdminDashboard() {
   const [success, setSuccess] = useState('')
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [loadingPosts, setLoadingPosts] = useState(true)
+  const [deletingSlug, setDeletingSlug] = useState<string | null>(null)
   const [refreshingReviews, setRefreshingReviews] = useState(false)
   const [reviewRefreshStatus, setReviewRefreshStatus] = useState<{ type: 'success' | 'error' | null, message: string }>({ type: null, message: '' })
 
@@ -231,6 +232,31 @@ export default function AdminDashboard() {
     setShowForm(false)
     setError('')
     setSuccess('')
+  }
+
+  const handleDelete = async (slug: string, title: string) => {
+    if (!window.confirm(`Delete “${title}”? This cannot be undone.`)) return
+    setDeletingSlug(slug)
+    setError('')
+    setSuccess('')
+    try {
+      const response = await fetch(`/api/admin/posts/${slug}`, { method: 'DELETE' })
+      const data = await response.json()
+      if (response.ok) {
+        setSuccess(`Blog post “${title}” deleted.`)
+        if (editingSlug === slug) {
+          resetForm()
+          setShowForm(false)
+        }
+        await fetchPosts()
+      } else {
+        setError(data.error || 'Failed to delete post')
+      }
+    } catch {
+      setError('An error occurred while deleting the post')
+    } finally {
+      setDeletingSlug(null)
+    }
   }
 
   const handleLogout = async () => {
@@ -598,6 +624,14 @@ export default function AdminDashboard() {
                       >
                         View
                       </Link>
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(post.slug, post.title)}
+                        disabled={deletingSlug === post.slug}
+                        className="px-4 py-2 text-red-600 border border-red-600 rounded-lg hover:bg-red-50 transition-colors text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {deletingSlug === post.slug ? 'Deleting...' : 'Delete'}
+                      </button>
                     </div>
                   </div>
                 </div>

@@ -1,21 +1,51 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { getAllPosts } from '@/lib/blog'
-import { format } from 'date-fns'
-import MiniContactForm from '@/components/sections/MiniContactForm'
+import { getAllPosts, getAllTags } from '@/lib/blog'
+import BlogSearch from '@/components/blog/BlogSearch'
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nevadalicensedefense.com'
+const blogUrl = `${siteUrl}/blog`
+const defaultOgImage = `${siteUrl}/images/NEVADA LICENSE DEFENSE LOGO.png`
 
 export const metadata = {
   title: 'Articles | Nevada License Defense',
   description: 'Stay informed about professional license defense in Nevada. Read our latest articles on board procedures, legal updates, and license defense strategies.',
+  keywords: [
+    'Nevada license defense',
+    'professional license defense Nevada',
+    'Nevada license defense attorney',
+    'board procedures',
+    'license defense strategies',
+    'Nevada State Board of Nursing',
+    'Nevada Board of Pharmacy',
+    'Nevada Board of Medical Examiners',
+  ],
   openGraph: {
     title: 'Articles | Nevada License Defense',
-    description: 'Stay informed about professional license defense in Nevada.',
+    description: 'Stay informed about professional license defense in Nevada. Read our latest articles on board procedures, legal updates, and license defense strategies.',
     type: 'website',
+    url: blogUrl,
+    images: [
+      {
+        url: defaultOgImage,
+        width: 1200,
+        height: 630,
+        alt: 'Nevada License Defense - Professional License Defense Articles',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Articles | Nevada License Defense',
+    description: 'Stay informed about professional license defense in Nevada.',
+    images: [defaultOgImage],
+  },
+  alternates: {
+    canonical: blogUrl,
   },
 }
 
 export default function BlogPage() {
   const posts = getAllPosts()
+  const allTags = getAllTags(posts)
 
   return (
     <div className="section-padding bg-white">
@@ -27,97 +57,12 @@ export default function BlogPage() {
               Articles
             </h1>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Stay informed about professional license defense in Nevada. 
+              Stay informed about professional license defense in Nevada.
               Read our latest articles on board procedures, legal updates, and license defense strategies.
             </p>
           </div>
 
-          {/* Articles Grid with Contact Form */}
-          {posts.length === 0 ? (
-            <div className="bg-gray-50 p-12 rounded-lg text-center">
-              <p className="text-lg text-gray-600">
-                Articles coming soon. Check back for updates on professional license defense, 
-                board procedures, and legal updates.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post, index) => (
-                <article
-                  key={post.slug}
-                  className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col"
-                >
-                  {post.image && (
-                    <Link href={`/blog/${post.slug}`} className="block relative h-48 w-full">
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    </Link>
-                  )}
-                  <div className="p-6 flex-1 flex flex-col">
-                    <div className="mb-2">
-                      <time
-                        dateTime={post.date}
-                        className="text-sm text-gray-500"
-                      >
-                        {format(new Date(post.date), 'MMMM d, yyyy')}
-                      </time>
-                    </div>
-                    <Link href={`/blog/${post.slug}`}>
-                      <h2 className="text-2xl font-bold text-dark-blue mb-3 hover:text-dark-gold transition-colors">
-                        {post.title}
-                      </h2>
-                    </Link>
-                    {post.excerpt && (
-                      <p className="text-gray-700 mb-4 line-clamp-3 flex-1">
-                        {post.excerpt}
-                      </p>
-                    )}
-                    {post.tags && post.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {post.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-xs bg-light-gold text-dark-blue px-2 py-1 rounded"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="text-dark-blue font-semibold hover:text-dark-gold transition-colors inline-flex items-center mt-auto"
-                    >
-                      Read More
-                      <svg
-                        className="w-4 h-4 ml-1"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
-                  </div>
-                </article>
-              ))}
-              
-              {/* Mini Contact Form Card - Inserted after 3rd post */}
-              {posts.length > 2 && (
-                <div key="contact-form" className="md:col-span-2 lg:col-span-1">
-                  <MiniContactForm />
-                </div>
-              )}
-            </div>
-          )}
+          <BlogSearch posts={posts} allTags={allTags} />
         </div>
       </div>
     </div>

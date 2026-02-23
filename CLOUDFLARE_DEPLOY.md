@@ -77,6 +77,38 @@ npm run preview
 
 This runs `opennextjs-cloudflare build` then serves the app with Wrangler. For everyday development, `npm run dev` is still fine.
 
+## Will my APIs work on Cloudflare?
+
+**Yes, but with one limitation:** Cloudflare Workers have **no writable filesystem**. So:
+
+### Works on Cloudflare today (no code change)
+
+- **Contact form** – Uses Resend (external API over the network). Set `RESEND_API_KEY` in Cloudflare **Settings → Variables**.
+- **Google OAuth** – `/api/auth/google`, `/api/auth/google/callback`. External redirects and API calls; set your Google OAuth env vars in Cloudflare.
+- **Google Places / Reviews (read-only)** – Fetching reviews from Google’s API works. Set `GOOGLE_PLACE_ID` and `GOOGLE_PLACES_API_KEY` (or OAuth client) in Cloudflare.
+- **YouTube videos** – `/api/youtube-videos`, `/api/youtube-videos/rss`, `/api/youtube-videos/manual`. All use `fetch` or static JSON; no disk.
+- **Find Place ID** – `/api/find-place-id`. External API call.
+- **Admin login / logout** – Cookie-based; works.
+
+### Does not work on Cloudflare (uses the filesystem)
+
+- **Reviews archive** – `lib/reviews.ts` reads and writes `content/reviews.json`. On Workers, that file isn’t writable and may not be readable at runtime. So “refresh reviews” and “manual import” won’t persist; the homepage may not show saved reviews.
+- **Blog** – `lib/blog.ts` reads `content/blog/*.md`. Blog pages are **static at build time**, so the site can show the blog. Any **runtime** read of blog files won’t work.
+- **Admin: create/update/delete posts** – Writes markdown to `content/blog/`. No disk = no persistence.
+- **Admin: upload images** – Writes to `public/images/blog/`. No disk = uploads can’t be saved.
+
+### Making everything work: use Cloudflare storage (bindings)
+
+To get reviews, admin posts, and uploads working on Cloudflare you need to **replace the filesystem** with Cloudflare storage and use **bindings** in your Worker:
+
+1. **Reviews** – Store `reviews.json` in [KV](https://developers.cloudflare.com/kv/) (or [R2](https://developers.cloudflare.com/r2/) as a single object). Add a KV namespace in the dashboard, add the binding to `wrangler.jsonc`, then change `lib/reviews.ts` to read/write via the binding instead of `fs`. See [OpenNext bindings](https://opennext.js.org/cloudflare/bindings).
+2. **Blog posts (admin)** – Either keep blog as **build-time only** (edit in repo, push, redeploy) or store post content in KV/D1 and change `lib/blog.ts` and admin post APIs to use the binding.
+3. **Admin uploads** – Store files in [R2](https://developers.cloudflare.com/r2/). Add an R2 bucket and binding, then change `/api/admin/upload` to upload to R2 and serve images from R2 (or a public bucket URL).
+
+After you add bindings to `wrangler.jsonc`, you access them in API routes and server code via the request context (e.g. `getCloudflareContext()` from `@opennextjs/cloudflare`). The OpenNext docs link above shows the exact pattern.
+
+**Summary:** Contact, Google, YouTube, and auth APIs work as-is once env vars are set. Reviews archive, admin posts, and admin uploads need a one-time migration from “file on disk” to “KV or R2” plus small code changes so your API stuff fully works on the platform.
+
 ## Troubleshooting: You see "Hello World" instead of your site
 
 That usually means the **Worker** running at that URL is still the default template, not your Next.js app. Check the following:

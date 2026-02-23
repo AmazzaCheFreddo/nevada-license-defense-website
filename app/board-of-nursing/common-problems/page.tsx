@@ -12,31 +12,31 @@ export default function CommonProblemsPage() {
     {
       title: 'Criminal Convictions',
       description: 'Previous criminal convictions can affect your nursing license. We help navigate the endorsement and application process.',
-      image: '/images/filler images/doctor_reviewing_paperwork.jpg',
+      image: '/images/filler images/worried-tired-doctor-working-late-pressure-find-cure-illness.jpg',
       imageAlt: 'Legal documentation review',
     },
     {
       title: 'Substance Abuse Issues',
       description: 'We assist nurses dealing with substance abuse issues and help them maintain or regain their licenses.',
-      image: '/images/filler images/female_nurse_holding_hands.jpg',
+      image: '/images/filler images/medications_pillpouches.jpg',
       imageAlt: 'Supportive healthcare professional',
     },
     {
       title: 'Disciplinary Actions',
       description: 'Facing disciplinary action? We provide strong representation to protect your license and career.',
-      image: '/images/filler images/female_nurse_on_phonecall_thinking.jpg',
+      image: '/images/filler images/side-view-female-doctor-looking-tired.jpg',
       imageAlt: 'Nurse seeking legal advice',
     },
     {
       title: 'License Renewal Issues',
       description: 'Problems with license renewal? We help resolve issues and ensure your license remains active.',
-      image: '/images/filler images/nurse_overlooking_paperwork.jpg',
+      image: '/images/filler images/young-male-doctor-writing-clipboard-clinic.jpg',
       imageAlt: 'Nurse reviewing paperwork',
     },
     {
       title: 'Complaints and Investigations',
       description: 'We defend nurses against complaints and guide them through the investigation process.',
-      image: '/images/filler images/female_nurse_reviewing_xrays.jpg',
+      image: '/images/filler images/male_nurse_sitting_on_ground_tired.jpg',
       imageAlt: 'Nurse reviewing documentation',
     },
   ]

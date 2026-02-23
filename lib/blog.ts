@@ -8,6 +8,7 @@ export interface BlogPost {
   slug: string
   title: string
   date: string
+  dateModified?: string
   author: string
   excerpt: string
   content: string
@@ -33,6 +34,7 @@ export function getAllPosts(): BlogPost[] {
         slug,
         title: data.title || '',
         date: data.date || '',
+        dateModified: data.dateModified || undefined,
         author: data.author || 'Craig K. Perry',
         excerpt: data.excerpt || '',
         content,
@@ -61,6 +63,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
       slug,
       title: data.title || '',
       date: data.date || '',
+      dateModified: data.dateModified || undefined,
       author: data.author || 'Craig K. Perry',
       excerpt: data.excerpt || '',
       content,
@@ -81,5 +84,37 @@ export function getAllPostSlugs(): string[] {
   return fileNames
     .filter((name) => name.endsWith('.md') && name !== 'README.md')
     .map((fileName) => fileName.replace(/\.md$/, ''))
+}
+
+/** All unique tags across all posts, sorted. Deduped case-insensitively (first occurrence wins). */
+export function getAllTags(posts: BlogPost[]): string[] {
+  const byLower = new Map<string, string>()
+  for (const post of posts) {
+    for (const tag of post.tags ?? []) {
+      const key = tag.toLowerCase()
+      if (!byLower.has(key)) byLower.set(key, tag)
+    }
+  }
+  return Array.from(byLower.values()).sort()
+}
+
+/** Deletes a post by slug. Returns true if deleted, false if not found. Disallows path traversal. */
+export function deletePost(slug: string): boolean {
+  if (!slug || slug.includes('..') || slug.includes(path.sep) || /[\/\\]/.test(slug)) {
+    return false
+  }
+  const fullPath = path.join(postsDirectory, `${slug}.md`)
+  if (!path.resolve(fullPath).startsWith(path.resolve(postsDirectory))) {
+    return false
+  }
+  try {
+    if (fs.existsSync(fullPath)) {
+      fs.unlinkSync(fullPath)
+      return true
+    }
+    return false
+  } catch {
+    return false
+  }
 }
 

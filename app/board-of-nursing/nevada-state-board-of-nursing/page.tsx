@@ -66,7 +66,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
             <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
               <Image
-                src="/images/filler images/african-american-nurse-using-digital-tablet-treatment.jpg"
+                src="/images/filler images/physician-writing-prescription-treatment-plan-help-with-recovery.jpg"
                 alt="Nurse reviewing medical x-rays"
                 width={600}
                 height={300}
@@ -86,8 +86,8 @@ export default function NevadaStateBoardOfNursingPage() {
 
             <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
               <Image
-                src="/images/filler images/medium-shot-nurses-taking-care-patient.jpg"
-                alt="Nurses taking care of patient"
+                src="/images/filler images/doctor_taking_blood_pressure_3.jpg"
+                alt="Patient assessment"
                 width={600}
                 height={300}
                 className="w-full h-80 object-cover"
@@ -106,7 +106,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
             <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
               <Image
-                src="/images/filler images/young-doctor-reading-notes-clipboard.jpg"
+                src="/images/filler images/gynecologist-getting-ready-appointment.jpg"
                 alt="Healthcare professional reviewing notes"
                 width={600}
                 height={300}
@@ -126,7 +126,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
             <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
               <Image
-                src="/images/filler images/nurse-with-patient-osteopathy-session.jpg"
+                src="/images/filler images/osteopathy-patient-getting-treatment-massage (1).jpg"
                 alt="Nurse providing patient care"
                 width={600}
                 height={300}
@@ -146,7 +146,7 @@ export default function NevadaStateBoardOfNursingPage() {
 
             <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
               <Image
-                src="/images/filler images/female-doctors-talking-work.jpg"
+                src="/images/filler images/nurses_consulting_together.jpg"
                 alt="Healthcare professionals communicating"
                 width={600}
                 height={300}

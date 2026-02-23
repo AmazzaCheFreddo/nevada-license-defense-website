@@ -4,6 +4,7 @@ import { format } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import ArticleShare from '@/components/blog/ArticleShare'
 
 interface PageProps {
   params: Promise<{
@@ -29,17 +30,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nevadalicensedefense.com'
+  const postUrl = `${siteUrl}/blog/${slug}`
   const imageUrl = post.image ? `${siteUrl}${post.image}` : `${siteUrl}/images/NEVADA LICENSE DEFENSE LOGO.png`
+  const modifiedTime = post.dateModified || post.date
+  const keywords = [
+    'Nevada license defense',
+    'Nevada License Defense',
+    ...(post.tags ?? []),
+  ]
 
   return {
     title: `${post.title} | Nevada License Defense Articles`,
     description: post.excerpt || `Read about ${post.title} on the Nevada License Defense articles.`,
+    keywords: keywords,
     authors: [{ name: post.author }],
     openGraph: {
       title: post.title,
       description: post.excerpt || '',
       type: 'article',
+      url: postUrl,
       publishedTime: post.date,
+      modifiedTime,
       authors: [post.author],
       images: [
         {
@@ -57,7 +68,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       images: [imageUrl],
     },
     alternates: {
-      canonical: `${siteUrl}/blog/${slug}`,
+      canonical: postUrl,
     },
   }
 }
@@ -171,6 +182,10 @@ export default async function BlogPostPage({ params }: PageProps) {
               <span className="text-gray-300">•</span>
               <span className="text-sm">By {post.author}</span>
             </div>
+            <ArticleShare
+              url={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://nevadalicensedefense.com'}/blog/${slug}`}
+              title={post.title}
+            />
           </header>
 
           {/* Featured Image */}
@@ -203,7 +218,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 headline: post.title,
                 image: post.image ? `${process.env.NEXT_PUBLIC_SITE_URL || 'https://nevadalicensedefense.com'}${post.image}` : undefined,
                 datePublished: post.date,
-                dateModified: post.date,
+                dateModified: post.dateModified || post.date,
                 author: {
                   '@type': 'Person',
                   name: post.author,

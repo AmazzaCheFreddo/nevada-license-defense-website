@@ -35,7 +35,7 @@ export default function BoardOfMedicalExaminersPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden flex flex-col">
                 <Image
-                  src="/images/filler images/ai_edited_2.jpeg"
+                  src="/images/filler images/medical-specialist-using-computer-keyboard-night.jpg"
                   alt="Doctor reviewing documents"
                   width={600}
                   height={300}
@@ -76,7 +76,7 @@ loading="lazy"
 
               <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
                 <Image
-                  src="/images/filler images/front-view-practitioner-doctor-typing-medical-expertise-computer-while-background-black-asisstant-discussing-healthcare-treatment-hospitalized-patient-having-respi.jpg"
+                  src="/images/filler images/full-shot-doctors-sitting-together.jpg"
                   alt="Doctor reviewing medical records"
                   width={600}
                   height={300}
@@ -97,7 +97,7 @@ loading="lazy"
 
               <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden flex flex-col">
                 <Image
-                  src="/images/filler images/male_doctor_flirting_with_patient.png"
+                  src="/images/filler images/freepik__the-style-is-candid-image-photography-with-natural__59023.png"
                   alt="Doctor patient consultation"
                   width={600}
                   height={300}
@@ -118,7 +118,7 @@ loading="lazy"
 
               <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden flex flex-col">
                 <Image
-                  src="/images/filler images/male_doctor_yelling_at_patient_2.png"
+                  src="/images/filler images/freepik__female-doctor-with-folded-arms-angry-glare-at-pati__49372.png"
                   alt="Disruptive behavior"
                   width={600}
                   height={300}
@@ -179,7 +179,7 @@ loading="lazy"
 
               <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
                 <Image
-                  src="/images/filler images/full-shot-doctors-sitting-together.jpg"
+                  src="/images/filler images/young-woman-doctor-with-stethoscope-hospital.jpg"
                   alt="Disreputable conduct"
                   width={600}
                   height={300}
@@ -199,7 +199,7 @@ loading="lazy"
 
               <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden flex flex-col">
                 <Image
-                  src="/images/filler images/male_doctor_exchanging_numbers_with_patient.png"
+                  src="/images/filler images/freepik__male-doctor-flirting-with-female-patient-intimate-__99225.png"
                   alt="Inappropriate contact"
                   width={600}
                   height={300}
