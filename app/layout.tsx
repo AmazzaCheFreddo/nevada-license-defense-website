@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: 'Nevada License Defense | Professional License Defense Attorney',
   description: 'Licensed Nevada Attorney Craig K. Perry defends professional licenses before various Nevada State Boards including Nursing, Pharmacy, and Medical Examiners.',
   keywords: 'Nevada license defense, nursing license defense, pharmacy license defense, medical license defense, professional license attorney',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://nevada-license-defense.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://nevadalicensedefense.com'),
   openGraph: {
     type: 'website',
     locale: 'en_US',
