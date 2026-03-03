@@ -218,7 +218,11 @@ export default function AdminDashboard() {
         // Refresh posts list
         await fetchPosts()
       } else {
-        setError(data.error || `Failed to ${isEditing ? 'update' : 'create'} blog post`)
+        if (response.status === 503 && data.code === 'BLOG_EDITING_DISABLED') {
+          setError(data.error)
+        } else {
+          setError(data.error || `Failed to ${isEditing ? 'update' : 'create'} blog post`)
+        }
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
@@ -250,7 +254,11 @@ export default function AdminDashboard() {
         }
         await fetchPosts()
       } else {
-        setError(data.error || 'Failed to delete post')
+        if (response.status === 503 && data.code === 'BLOG_EDITING_DISABLED') {
+          setError(data.error)
+        } else {
+          setError(data.error || 'Failed to delete post')
+        }
       }
     } catch {
       setError('An error occurred while deleting the post')

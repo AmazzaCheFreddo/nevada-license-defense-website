@@ -94,8 +94,19 @@ This runs `opennextjs-cloudflare build` then serves the app with Wrangler. For e
 
 - **Reviews archive** – `lib/reviews.ts` reads and writes `content/reviews.json`. On Workers, that file isn’t writable and may not be readable at runtime. So “refresh reviews” and “manual import” won’t persist; the homepage may not show saved reviews.
 - **Blog** – `lib/blog.ts` reads `content/blog/*.md`. Blog pages are **static at build time**, so the site can show the blog. Any **runtime** read of blog files won’t work.
-- **Admin: create/update/delete posts** – Writes markdown to `content/blog/`. No disk = no persistence.
+- **Admin: create/update/delete posts** – Writes markdown to `content/blog/`. No disk = no persistence. If you try to create or edit a post on the live Cloudflare site, you’ll see a clear message that blog editing isn’t available and how to add posts instead.
 - **Admin: upload images** – Writes to `public/images/blog/`. No disk = uploads can’t be saved.
+
+### How to add or edit blog posts when deployed on Cloudflare
+
+Because Cloudflare Workers have no writable filesystem, you **cannot** create or update posts from the admin panel on the live site. Use this workflow instead:
+
+1. **Locally** (or in your repo): Create or edit markdown files in `content/blog/`, e.g. `content/blog/my-new-post.md`.
+2. Use the same frontmatter format as existing posts (title, date, author, excerpt, image, tags) and write the body in HTML or Markdown.
+3. **Commit and push** to your main branch. Your GitHub Actions (or Cloudflare Git) build will run and deploy.
+4. The new or updated post will appear on the site after the next successful deploy.
+
+**Optional:** In Cloudflare **Workers & Pages → your project → Settings → Variables**, you can set `DISABLE_FS_BLOG_EDITING` = `true`. Then the admin panel will show the “not available on this deployment” message as soon as you try to create/edit, instead of attempting a write and failing.
 
 ### Making everything work: use Cloudflare storage (bindings)
 

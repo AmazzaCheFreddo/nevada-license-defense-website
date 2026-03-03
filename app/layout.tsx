@@ -29,6 +29,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Preload hero mountain images so they're ready before the rise animation */}
+        <link rel="preload" href="/images/mountain_midground.png" as="image" />
+        <link rel="preload" href="/images/mountain_foreground.png" as="image" />
+      </head>
       <body className={josefinSans.className}>
         <ConditionalLayout>
           {children}

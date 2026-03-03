@@ -126,7 +126,7 @@ loading="lazy"
 
             <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
               <Image
-                src="/images/filler images/woman-does-legs-raise-exercise-therapist-helping-with-mechanical-disorders.jpg"
+                src="/images/filler images/woman-does-legs-raise-exercise-therapist-helping-with-mechanical-disor.jpg"
                 alt="Physical therapy"
                 width={600}
                 height={300}

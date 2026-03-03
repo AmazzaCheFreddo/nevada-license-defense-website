@@ -1,9 +1,14 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Hero() {
+  const [midLoaded, setMidLoaded] = useState(false)
+  const [foreLoaded, setForeLoaded] = useState(false)
+  const mountainsReady = midLoaded && foreLoaded
+
   return (
     <section className="relative h-screen overflow-hidden">
       {/* Cloud Background - Static */}
@@ -20,8 +25,11 @@ export default function Hero() {
         />
       </div>
 
-      {/* Mountain Midground - Rises up */}
-      <div className="absolute inset-0 z-10 animate-mountain-rise-mid" style={{ transform: 'translateY(100%)' }}>
+      {/* Mountain Midground - Rises up only after image has loaded */}
+      <div
+        className={`absolute inset-0 z-10 ${mountainsReady ? 'animate-mountain-rise-mid' : ''}`}
+        style={!mountainsReady ? { transform: 'translateY(100%)' } : undefined}
+      >
         <Image
           src="/images/mountain_midground.png"
           alt="Mountain midground"
@@ -31,11 +39,15 @@ export default function Hero() {
           quality={92}
           priority
           sizes="100vw"
+          onLoad={() => setMidLoaded(true)}
         />
       </div>
 
-      {/* Mountain Foreground - Rises up and overlaps */}
-      <div className="absolute inset-0 z-20 animate-mountain-rise-fore" style={{ transform: 'translateY(100%)' }}>
+      {/* Mountain Foreground - Rises up only after image has loaded */}
+      <div
+        className={`absolute inset-0 z-20 ${mountainsReady ? 'animate-mountain-rise-fore' : ''}`}
+        style={!mountainsReady ? { transform: 'translateY(100%)' } : undefined}
+      >
         <Image
           src="/images/mountain_foreground.png"
           alt="Mountain foreground"
@@ -45,6 +57,7 @@ export default function Hero() {
           quality={92}
           priority
           sizes="100vw"
+          onLoad={() => setForeLoaded(true)}
         />
       </div>
 
