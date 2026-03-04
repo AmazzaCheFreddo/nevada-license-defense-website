@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { requireAuth } from '@/lib/admin'
+import { requireAuth, blogEditingDisabledResponse, isFsUnavailableError } from '@/lib/admin'
 import { getPostBySlug, deletePost } from '@/lib/blog'
 
 export async function GET(
@@ -39,6 +39,11 @@ export async function DELETE(
 ) {
   try {
     await requireAuth()
+
+    if (process.env.DISABLE_FS_BLOG_EDITING === '1' || process.env.DISABLE_FS_BLOG_EDITING === 'true') {
+      return blogEditingDisabledResponse()
+    }
+
     const { slug } = await params
     const deleted = deletePost(slug)
     if (!deleted) {
@@ -54,6 +59,9 @@ export async function DELETE(
         { error: 'Unauthorized' },
         { status: 401 }
       )
+    }
+    if (isFsUnavailableError(error)) {
+      return blogEditingDisabledResponse()
     }
     return NextResponse.json(
       { error: 'Failed to delete post' },

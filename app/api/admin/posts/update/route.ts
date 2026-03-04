@@ -1,13 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
-import { requireAuth } from '@/lib/admin'
+import { requireAuth, blogEditingDisabledResponse, isFsUnavailableError } from '@/lib/admin'
 
 const postsDirectory = path.join(process.cwd(), 'content', 'blog')
 
 export async function PUT(request: NextRequest) {
   try {
     await requireAuth()
+
+    if (process.env.DISABLE_FS_BLOG_EDITING === '1' || process.env.DISABLE_FS_BLOG_EDITING === 'true') {
+      return blogEditingDisabledResponse()
+    }
 
     const body = await request.json()
     const { originalSlug, title, date, author, excerpt, image, tags, content, slug } = body
@@ -64,14 +68,16 @@ export async function PUT(request: NextRequest) {
       slug: postSlug,
       message: 'Blog post updated successfully',
     })
-  } catch (error: any) {
-    if (error.message === 'Unauthorized') {
+  } catch (error: unknown) {
+    if (error instanceof Error && error.message === 'Unauthorized') {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
       )
     }
-
+    if (isFsUnavailableError(error)) {
+      return blogEditingDisabledResponse()
+    }
     console.error('Error updating blog post:', error)
     return NextResponse.json(
       { error: 'Failed to update blog post' },

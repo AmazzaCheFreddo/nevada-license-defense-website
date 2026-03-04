@@ -1,3 +1,15 @@
+import type { Metadata } from 'next'
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nevadalicensedefense.com'
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy | Nevada License Defense',
+  description: 'Privacy policy for Nevada License Defense. Learn how we collect, use, and protect your personal information.',
+  alternates: {
+    canonical: `${siteUrl}/privacy-policy`,
+  },
+}
+
 export default function PrivacyPolicyPage() {
   return (
     <div className="section-padding">

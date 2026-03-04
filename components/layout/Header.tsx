@@ -78,7 +78,7 @@ export default function Header() {
           {/* Mobile menu button */}
           <div className="flex-1 flex justify-end">
             <button
-              className="lg:hidden p-2 text-gray-700"
+              className="xl:hidden p-2 text-gray-700"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -104,7 +104,7 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-gray-200">
+          <div className="xl:hidden py-4 border-t border-gray-200">
             {/* Mobile Call Button */}
             <a
               href="tel:7028934777"
@@ -163,9 +163,9 @@ export default function Header() {
     </header>
     
     {/* Sticky Navigation Bar - Separate from header */}
-    <div className="hidden lg:block bg-white border-t border-gray-200 sticky top-0 z-[99]">
+    <div className="hidden xl:block bg-white border-t border-gray-200 sticky top-0 z-[99]">
       <div className="section-container relative">
-        <div className="flex items-center justify-center flex-nowrap space-x-4 xl:space-x-6 py-4">
+        <div className="flex items-center justify-center flex-nowrap space-x-3 2xl:space-x-6 py-4">
           {navigation.map((item) => (
             <div
               key={item.name}

@@ -166,6 +166,8 @@ export default function BlogSearch({ posts, allTags }: BlogSearchProps) {
                     src={post.image}
                     alt={post.title}
                     fill
+                    quality={85}
+                    loading="lazy"
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />

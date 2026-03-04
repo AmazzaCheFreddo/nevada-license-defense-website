@@ -48,6 +48,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
+    {
+      url: `${siteUrl}/board-of-nursing/common-problems`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${siteUrl}/board-of-nursing/how-we-help`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${siteUrl}/board-of-nursing/videos`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${siteUrl}/privacy-policy`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly' as const,
+      priority: 0.3,
+    },
   ]
 
   const blogRoutes = posts.map((post) => ({

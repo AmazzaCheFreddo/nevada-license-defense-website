@@ -1,5 +1,29 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import type { Metadata } from 'next'
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nevadalicensedefense.com'
+
+export const metadata: Metadata = {
+  title: 'How We Help Nurses | Nevada License Defense',
+  description: 'Our law firm helps nurses respond to NSBN inquiries, defend against disciplinary proceedings, resolve license renewal issues, handle criminal conviction matters, and negotiate settlements.',
+  keywords: 'nursing license help, NSBN defense attorney, nursing disciplinary defense, nursing license renewal help, nursing investigation defense, consent agreement negotiation',
+  openGraph: {
+    title: 'How We Help Nurses | Nevada License Defense',
+    description: 'We specialize in protecting nurses\' licenses and responding to NSBN inquiries, investigations, and complaints.',
+    type: 'website',
+    url: `${siteUrl}/board-of-nursing/how-we-help`,
+    images: [{ url: `${siteUrl}/images/NEVADA LICENSE DEFENSE LOGO.png`, width: 1200, height: 630, alt: 'How We Help Nurses' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'How We Help Nurses | Nevada License Defense',
+    description: 'We specialize in protecting nurses\' licenses before the NSBN.',
+  },
+  alternates: {
+    canonical: `${siteUrl}/board-of-nursing/how-we-help`,
+  },
+}
 
 export default function HowWeHelpPage() {
   const services = [

@@ -195,6 +195,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 src={post.image}
                 alt={post.title}
                 fill
+                quality={85}
                 className="object-cover"
                 priority
                 sizes="(max-width: 768px) 100vw, 896px"

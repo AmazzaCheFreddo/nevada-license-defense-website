@@ -1,5 +1,29 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import type { Metadata } from 'next'
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nevadalicensedefense.com'
+
+export const metadata: Metadata = {
+  title: 'Common Nursing License Problems | Nevada License Defense',
+  description: 'Common issues nurses face with the Nevada State Board of Nursing: letters of inquiry, criminal convictions, substance abuse, disciplinary actions, license renewal, complaints and investigations.',
+  keywords: 'nursing license problems, NSBN complaints, nursing disciplinary action, nursing license renewal, substance abuse nursing license, criminal conviction nursing license',
+  openGraph: {
+    title: 'Common Nursing License Problems | Nevada License Defense',
+    description: 'Learn about common issues nurses face with the NSBN and how we can help protect your license.',
+    type: 'website',
+    url: `${siteUrl}/board-of-nursing/common-problems`,
+    images: [{ url: `${siteUrl}/images/NEVADA LICENSE DEFENSE LOGO.png`, width: 1200, height: 630, alt: 'Common Nursing License Problems' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Common Nursing License Problems | Nevada License Defense',
+    description: 'Learn about common issues nurses face with the NSBN and how we can help.',
+  },
+  alternates: {
+    canonical: `${siteUrl}/board-of-nursing/common-problems`,
+  },
+}
 
 export default function CommonProblemsPage() {
   const problems = [
