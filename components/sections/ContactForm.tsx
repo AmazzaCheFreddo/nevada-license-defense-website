@@ -3,6 +3,14 @@
 import { useState } from 'react'
 import Image from 'next/image'
 
+function formatPhoneNumber(value: string): string {
+  const digits = value.replace(/\D/g, '').slice(0, 10)
+  if (digits.length === 0) return ''
+  if (digits.length <= 3) return `(${digits}`
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`
+}
+
 interface FormErrors {
   firstName?: string
   lastName?: string
@@ -53,11 +61,9 @@ export default function ContactForm() {
 
     // Phone validation (optional but validate format if provided)
     if (formData.phone.trim()) {
-      const phoneRegex = /^[\d\s\-\(\)\+\.]+$/
-      if (!phoneRegex.test(formData.phone.trim())) {
-        newErrors.phone = 'Please enter a valid phone number'
-      } else if (formData.phone.replace(/\D/g, '').length < 10) {
-        newErrors.phone = 'Phone number must contain at least 10 digits'
+      const digits = formData.phone.replace(/\D/g, '')
+      if (digits.length < 10) {
+        newErrors.phone = 'Please enter a complete 10-digit phone number'
       }
     }
 
@@ -128,12 +134,12 @@ export default function ContactForm() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    
+
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: name === 'phone' ? formatPhoneNumber(value) : value,
     })
-    
+
     // Clear error for this field when user starts typing
     if (errors[name as keyof FormErrors]) {
       setErrors({
@@ -141,7 +147,7 @@ export default function ContactForm() {
         [name]: undefined,
       })
     }
-    
+
     // Clear general error message when user starts typing
     if (errorMessage) {
       setErrorMessage('')
