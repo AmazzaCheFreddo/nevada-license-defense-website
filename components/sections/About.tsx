@@ -36,6 +36,9 @@ export default function About() {
                   alt="Healthcare professionals collaborating"
                   width={600}
                   height={400}
+                  quality={85}
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="w-full h-auto object-cover transition-transform duration-500 ease-in-out hover:scale-105"
                 />
               </div>

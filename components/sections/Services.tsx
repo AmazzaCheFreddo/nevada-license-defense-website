@@ -170,6 +170,9 @@ export default function Services() {
                   alt={service.imageAlt}
                   width={400}
                   height={250}
+                  quality={85}
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="w-full h-48 object-cover transition-transform duration-500 ease-in-out hover:scale-105"
                 />
               </div>

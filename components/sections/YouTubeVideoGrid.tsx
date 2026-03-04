@@ -75,6 +75,8 @@ export default function YouTubeVideoGrid({ videos, channelUrl }: YouTubeVideoGri
                 src={video.thumbnail}
                 alt={video.title}
                 fill
+                quality={80}
+                loading="lazy"
                 className="object-cover group-hover:opacity-90 transition-opacity"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
