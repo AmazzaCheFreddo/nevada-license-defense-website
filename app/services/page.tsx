@@ -1,5 +1,29 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import type { Metadata } from 'next'
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nevadalicensedefense.com'
+
+export const metadata: Metadata = {
+  title: 'Additional Services | Nevada License Defense',
+  description: 'Nevada License Defense represents professionals before multiple state boards including Veterinary Examiners, Dental Examiners, Psychological Examiners, Physical Therapy, and more.',
+  keywords: 'Nevada professional license defense, veterinary license defense, dental license defense, chiropractic license defense, psychology license defense, physical therapy license defense',
+  openGraph: {
+    title: 'Additional Services | Nevada License Defense',
+    description: 'We represent professionals before multiple Nevada state licensing boards. Free consultation available.',
+    type: 'website',
+    url: `${siteUrl}/services`,
+    images: [{ url: `${siteUrl}/images/NEVADA LICENSE DEFENSE LOGO.png`, width: 1200, height: 630, alt: 'Nevada License Defense Services' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Additional Services | Nevada License Defense',
+    description: 'We represent professionals before multiple Nevada state licensing boards.',
+  },
+  alternates: {
+    canonical: `${siteUrl}/services`,
+  },
+}
 
 export default function ServicesPage() {
   return (

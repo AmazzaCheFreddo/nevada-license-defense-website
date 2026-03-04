@@ -1,4 +1,28 @@
 import Image from 'next/image'
+import type { Metadata } from 'next'
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nevadalicensedefense.com'
+
+export const metadata: Metadata = {
+  title: 'Nevada Board of Pharmacy Defense | Nevada License Defense',
+  description: 'Defense against Nevada State Board of Pharmacy (BOP) investigations and disciplinary actions. We represent doctors, PAs, APRNs, and pharmacists facing pharmacy board complaints.',
+  keywords: 'Nevada Board of Pharmacy, pharmacy license defense, BOP defense, APRN prescribing license, PMP report, pharmacy disciplinary action, med spa compliance',
+  openGraph: {
+    title: 'Nevada Board of Pharmacy Defense | Nevada License Defense',
+    description: 'Defense against Nevada Board of Pharmacy investigations and disciplinary actions. Free consultation available.',
+    type: 'website',
+    url: `${siteUrl}/board-of-pharmacy`,
+    images: [{ url: `${siteUrl}/images/NEVADA LICENSE DEFENSE LOGO.png`, width: 1200, height: 630, alt: 'Nevada Board of Pharmacy Defense' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Nevada Board of Pharmacy Defense | Nevada License Defense',
+    description: 'Defense against Nevada Board of Pharmacy investigations and disciplinary actions.',
+  },
+  alternates: {
+    canonical: `${siteUrl}/board-of-pharmacy`,
+  },
+}
 
 export default function BoardOfPharmacyPage() {
   return (

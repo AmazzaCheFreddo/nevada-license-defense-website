@@ -1,5 +1,29 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import type { Metadata } from 'next'
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nevadalicensedefense.com'
+
+export const metadata: Metadata = {
+  title: 'Nevada State Board of Nursing Defense | Nevada License Defense',
+  description: 'Experienced defense against Nevada State Board of Nursing (NSBN) complaints, investigations, and disciplinary actions. Attorney Craig K. Perry has handled hundreds of nursing license cases.',
+  keywords: 'Nevada State Board of Nursing, NSBN defense, nursing license defense, nursing investigation, nursing disciplinary action, nurse attorney Nevada',
+  openGraph: {
+    title: 'Nevada State Board of Nursing Defense | Nevada License Defense',
+    description: 'Experienced defense against NSBN complaints, investigations, and disciplinary actions. Free consultation available.',
+    type: 'website',
+    url: `${siteUrl}/board-of-nursing/nevada-state-board-of-nursing`,
+    images: [{ url: `${siteUrl}/images/NEVADA LICENSE DEFENSE LOGO.png`, width: 1200, height: 630, alt: 'Nevada State Board of Nursing Defense' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Nevada State Board of Nursing Defense | Nevada License Defense',
+    description: 'Experienced defense against NSBN complaints and disciplinary actions.',
+  },
+  alternates: {
+    canonical: `${siteUrl}/board-of-nursing/nevada-state-board-of-nursing`,
+  },
+}
 
 export default function NevadaStateBoardOfNursingPage() {
   return (
